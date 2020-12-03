@@ -1,6 +1,43 @@
-.grid {
-    display: flex;
-    flex-wrap: wrap;
+
+body {
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+}
+header {
+    float: top;
+    height: 10%;
+    width: 100%;
+}
+* {
+    box-sizing: border-box;
+}
+#main {
     height: 90%;
     width: 100%;
+}
+#stats {
+    height: 100%;
+    width: 14%;
+    float: left;
+}
+#game-container {
+    height: 100%;
+    width: 86%;
+    float: right;
+}
+#card-container {
+    width: 16.67%;
+    height: 33%; 
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: aqua;
+}
+.card {
+    background-color: black;
+    height: 95%;
+    width: 95%; 
+    margin-top: 3.5%;
 }

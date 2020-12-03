@@ -1,86 +1,35 @@
-document.addEventListener('DOMContentLoaded', () => {
+ const cardArray = [
+   "memory-game/images/back-side.png",
+   "memory-game/images/banana.png",
+   "memory-game/images/carrot.png",
+   "memory-game/images/diiddy-kong.png",
+   "memory-game/images/mario.png",
+   "memory-game/images/match-maker.png",
+   "memory-game/images/matched-set.png",
+   "memory-game/images/star.png",
+   "memory-game/images/super.png",
+   "memory-game/images/the-real-kirby.png",
+ ];
 
-    //card array - this array will hold the name and directory address of each image
-    let memoryCardArray = [
-      {
-        name: "banana",
-        url: "memory-game/images/banana.png",
-      },
-      {
-        name: "banana",
-        url: "memory-game/images/banana.png",
-      },
-      {
-        name: "diiddy-kong",
-        url: "memory-game/images/diiddy-kong.png",
-      },
-      {
-        name: "diiddy-kong",
-        url: "memory-game/images/diiddy-kong.png",
-      },
-      {
-        name: "the-real-kirby",
-        url: "memory-game/images/the-real-kirby.png",
-      },
-      {
-        name: "the-real-kirby",
-        url: "memory-game/images/the-real-kirby.png",
-      },
-      {
-        name: "mario",
-        url: "memory-game/images/mario.png",
-      },
-      {
-        name: "mario",
-        url: "memory-game/images/mario.png",
-      },
-      {
-        name: "star",
-        url: "memory-game/images/star.png",
-      },
-      {
-        name: "star",
-        url: "memory-game/images/star.png",
-      },
-      {
-        name: "super",
-        url: "memory-game/images/super.png",
-      },
-      {
-        name: "super",
-        url: "memory-game/images/super.png",
-      },
-      {
-        name: "carrot",
-        url: "memory-game/images/carrot.png",
-      },
-      {
-        name: "carrot",
-        url: "memory-game/images/carrot.png",
-      },
-      {
-        name: "matched-set",
-        url: "memory-game/images/matched-set.png",
-      },
-      {
-        name: "matched-set",
-        url: "memory-game/images/matched-set.png",
-      },
-      {
-        name: "match-maker",
-        url: "memory-game/images/match-maker.png",
-      },
-      {
-        name: "match-maker",
-        url: "memory-game/images/match-maker.png",
-      },
-      {
-        name: "back-side",
-        url: "memory-game/images/back-side.png",
-      },
-      {
-        name: "back-side",
-        url: "memory-game/images/back-side.png",
-      },
-    ];
-});
+ function initalizeApp() {
+
+ };
+
+//  <div id="card-container">
+//    <div class="card">
+//      <div class="card-back"></div>
+//      <div class="card-front"></div>
+//    </div>
+//  </div>;
+
+ function createCards (imageArray) {
+    var totalArray = [...imageArray, ...imageArray];
+    const cardContainer = document.createElement('div')
+    cardContainer.setAttribute('id', 'card-container');
+    const card = document.createElement('div')
+    card.classList.add('card');
+    const back = document.createElement("div");
+    card.classList.add("back");
+    const front = document.createElement("div");
+    card.classList.add("front");
+ }; 
