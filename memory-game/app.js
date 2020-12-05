@@ -10,31 +10,34 @@
    "memory-game/images/super.png",
    "memory-game/images/the-real-kirby.png",
  ];
-initalizeApp();
-
 
  function createGameCards (images) {
-    const cardImages = [...imagesArray, ...imagesArray];
+    const cardImages = [...images, ...images];
 
     cardImages.forEach(image => {
-       let cardContainer = document.createElement("div");
+    console.log(image);
+       const cardContainer = document.createElement("div");
        cardContainer.id = "card-container";
-       let card = document.createElement('div');
+       const card = document.createElement('div');
        card.className = "card";
-       let back = document.createElement('div');
+       const back = document.createElement('div');
        back.className = "back";
-       let front = document.createElement('div');
+       const front = document.createElement('div');
        front.className = 'front'
-       front.style.backgroundImage = (`url:(memory-game/images/${image})`);
-       cardContainer.appendChild(card);
-       card.appendChild(back);
-       card.appendChild(front);
-       document.querySelector("#game-container").appendChild(cardContainer);
+    //    front.style.backgroundImage = (`url:(/images/${image})`);
+    //    back.style.backgroundImage = `url:(/images/back-side.png)`;
+    console.log(cardContainer);
+       cardContainer.append(card);
+       card.append(back);
+       card.append(front);
+       const gameContainer = document.querySelector("#game-container");
+       gameContainer.append(cardContainer);
     }) 
  };
    function initalizeApp() {
       createGameCards(imagesArray);
  };
+  initalizeApp();
  
 
 
