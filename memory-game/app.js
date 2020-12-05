@@ -9,6 +9,7 @@
    "images/super.png",
    "images/the-real-kirby.png",
  ];
+   initalizeApp();
 
  function createGameCards (images) {
     const cardImages = [...images, ...images];
@@ -38,7 +39,6 @@
    function initalizeApp() {
       createGameCards(imagesArray);
  };
-  initalizeApp();
  
 
 

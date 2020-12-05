@@ -4,6 +4,7 @@ body {
     height: 100vh;
     width: 100vw;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-content: center;
 }
@@ -22,12 +23,14 @@ header {
     float: left;
 }
 #game-container {
+    display: flex;
+    flex-wrap: wrap;
     height: 100%;
     width: 86%;
     float: right;
 }
 #card-container {
-    width: 16.67%;
+    width: 16.65%;
     height: 33%; 
     background-color: aqua;
 }
