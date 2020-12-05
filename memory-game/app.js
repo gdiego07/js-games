@@ -1,14 +1,13 @@
  const imagesArray = [
-   "memory-game/images/back-side.png",
-   "memory-game/images/banana.png",
-   "memory-game/images/carrot.png",
-   "memory-game/images/diiddy-kong.png",
-   "memory-game/images/mario.png",
-   "memory-game/images/match-maker.png",
-   "memory-game/images/matched-set.png",
-   "memory-game/images/star.png",
-   "memory-game/images/super.png",
-   "memory-game/images/the-real-kirby.png",
+   "images/banana.png",
+   "images/carrot.png",
+   "images/diiddy-kong.png",
+   "images/mario.png",
+   "images/match-maker.png",
+   "images/matched-set.png",
+   "images/star.png",
+   "images/super.png",
+   "images/the-real-kirby.png",
  ];
 
  function createGameCards (images) {
@@ -24,14 +23,16 @@
        back.className = "back";
        const front = document.createElement('div');
        front.className = 'front'
-    //    front.style.backgroundImage = (`url:(/images/${image})`);
-    //    back.style.backgroundImage = `url:(/images/back-side.png)`;
+       front.style.backgroundImage = `url:(/images/${image})`;
+       back.style.backgroundImage = `url:(/images/back-side.png)`;
     console.log(cardContainer);
        cardContainer.append(card);
        card.append(back);
        card.append(front);
        const gameContainer = document.querySelector("#game-container");
        gameContainer.append(cardContainer);
+       const main = document.querySelector("#main")
+       main.append(gameContainer);
     }) 
  };
    function initalizeApp() {

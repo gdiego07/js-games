@@ -1,14 +1,11 @@
-
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
 body {
     padding: 0;
     margin: 0;
     height: 100vh;
     width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }
 header {
     float: top;
@@ -16,9 +13,6 @@ header {
     width: 100%;
 }
 #main {
-    display: flex;
-    justify-content: center;
-    align-content: center;
     height: 90%;
     width: 100%;
 }
@@ -28,7 +22,6 @@ header {
     float: left;
 }
 #game-container {
-    display: flex;
     height: 100%;
     width: 86%;
     float: right;
@@ -36,9 +29,6 @@ header {
 #card-container {
     width: 16.67%;
     height: 33%; 
-    display: flex;
-    justify-content: center;
-    align-content: center;
     background-color: aqua;
 }
 .card {
