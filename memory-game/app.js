@@ -1,4 +1,4 @@
- const cardArray = [
+ const imagesArray = [
    "memory-game/images/back-side.png",
    "memory-game/images/banana.png",
    "memory-game/images/carrot.png",
@@ -10,26 +10,31 @@
    "memory-game/images/super.png",
    "memory-game/images/the-real-kirby.png",
  ];
+initalizeApp();
 
- function initalizeApp() {
 
+ function createGameCards (images) {
+    const cardImages = [...imagesArray, ...imagesArray];
+
+    cardImages.forEach(image => {
+       let cardContainer = document.createElement("div");
+       cardContainer.id = "card-container";
+       let card = document.createElement('div');
+       card.className = "card";
+       let back = document.createElement('div');
+       back.className = "back";
+       let front = document.createElement('div');
+       front.className = 'front'
+       front.style.backgroundImage = (`url:(memory-game/images/${image})`);
+       cardContainer.appendChild(card);
+       card.appendChild(back);
+       card.appendChild(front);
+       document.querySelector("#game-container").appendChild(cardContainer);
+    }) 
  };
+   function initalizeApp() {
+      createGameCards(imagesArray);
+ };
+ 
 
-//  <div id="card-container">
-//    <div class="card">
-//      <div class="card-back"></div>
-//      <div class="card-front"></div>
-//    </div>
-//  </div>;
 
- function createCards (imageArray) {
-    var totalArray = [...imageArray, ...imageArray];
-    const cardContainer = document.createElement('div')
-    cardContainer.setAttribute('id', 'card-container');
-    const card = document.createElement('div')
-    card.classList.add('card');
-    const back = document.createElement("div");
-    card.classList.add("back");
-    const front = document.createElement("div");
-    card.classList.add("front");
- }; 
