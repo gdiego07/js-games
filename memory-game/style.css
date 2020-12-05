@@ -16,6 +16,9 @@ header {
     width: 100%;
 }
 #main {
+    display: flex;
+    justify-content: center;
+    align-content: center;
     height: 90%;
     width: 100%;
 }
@@ -25,6 +28,7 @@ header {
     float: left;
 }
 #game-container {
+    display: flex;
     height: 100%;
     width: 86%;
     float: right;
@@ -38,7 +42,6 @@ header {
     background-color: aqua;
 }
 .card {
-    background-color: black;
     height: 95%;
     width: 95%; 
     margin-top: 3.5%;
