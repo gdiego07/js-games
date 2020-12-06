@@ -5,6 +5,7 @@ body {
     width: 100vw;
     display: flex;
     flex-wrap: wrap;
+    flex-direction: row;
     justify-content: center;
     align-content: center;
 }
@@ -18,24 +19,25 @@ header {
     width: 100%;
 }
 #stats {
-    height: 100%;
-    width: 14%;
-    float: left;
+    height: 10%;
+    width: 100%;
 }
 #game-container {
     display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
     flex-wrap: wrap;
     height: 100%;
-    width: 86%;
-    float: right;
+    width: 100%;
 }
 #card-container {
-    width: 16.65%;
-    height: 33%; 
+    align-content: center;
+    width: 16%;
+    height: 30%; 
     background-color: aqua;
+    margin: 1%;
 }
-.card {
-    height: 95%;
-    width: 95%; 
-    margin-top: 3.5%;
-}
+/* .card {
+
+
+} */

@@ -3,7 +3,6 @@
    "images/carrot.png",
    "images/diiddy-kong.png",
    "images/mario.png",
-   "images/match-maker.png",
    "images/matched-set.png",
    "images/star.png",
    "images/super.png",
