@@ -7,13 +7,22 @@
    "images/star.png",
    "images/super.png",
    "images/the-real-kirby.png",
- ];
-   initalizeApp();
-
- function createGameCards (images) {
+ ]; 
+function shuffle(array) {
+    var randomNumber, newArray, deck;
+    for (deck = array.length - 1; deck > 0; deck--) {
+        randomNumber = Math.floor(Math.random() * (deck + 1));
+        newArray = array[deck];
+        array[deck] = array[randomNumber];
+        array[randomNumber] = newArray;
+    }
+    return array;
+};
+   function createGameCards (images) {
     const cardImages = [...images, ...images];
-
-    cardImages.forEach(image => {
+      shuffle(cardImages);
+      console.log(cardImages);
+       cardImages.forEach(image => {
        const cardContainer = document.createElement("div");
        cardContainer.id = "card-container";
        const card = document.createElement('div');
@@ -31,37 +40,32 @@
        const main = document.querySelector("#main")
        main.append(gameContainer);
     }) 
+
  };
-
- function displayStats() {
-//  <div id="stats">
-//    <div class="score"></div>
-//    <div class="timer"></div>
-//    <div class="lives"></div>
-//  </div>;
-let scoreTrack = "0";
-let countdown = "2:00";
-let health = "5";
-const score = document.createElement("div");
-score.className = "score";
-const timer = document.createElement("div");
-timer.className = "timer";
-const lives = document.createElement("div");
-lives.className = "lives"
-score.append(scoreTrack);
-timer.append(countdown);
-lives.append(health);
-const stats = document.querySelector("#stats");
-stats.append(score);
-stats.append(timer);
-stats.append(lives);
+ function initalizeApp() {
+     createGameCards(imagesArray);
+ }
+ initalizeApp();
 
 
- }; 
-   function initalizeApp() {
-      createGameCards(imagesArray);
-      displayStats();
- };
  
+// function displayStats() {
+// let scoreTrack = "0";
+// let countdown = "2:00";
+// let health = "5";
+// const score = document.createElement("div");
+// score.className = "score";
+// const timer = document.createElement("div");
+// timer.className = "timer";
+// const lives = document.createElement("div");
+// lives.className = "lives"
+// score.append(scoreTrack);
+// timer.append(countdown);
+// lives.append(health);
+// const stats = document.querySelector("#stats");
+// stats.append(score);
+// stats.append(timer);
+// stats.append(lives);
+// };
 
 
