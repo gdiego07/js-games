@@ -8,8 +8,12 @@
    "images/super.png",
    "images/the-real-kirby.png",
  ]; 
-function shuffle(array) {
-    var randomNumber, newArray, deck;
+  let firstClick = null;
+  let secondClick = null;
+  const gameBox = document.querySelector("#game-container");
+
+function shuffleCards(array) {
+    let randomNumber, newArray, deck;
     for (deck = array.length - 1; deck > 0; deck--) {
         randomNumber = Math.floor(Math.random() * (deck + 1));
         newArray = array[deck];
@@ -18,10 +22,10 @@ function shuffle(array) {
     }
     return array;
 };
-   function createGameCards (images) {
+function createGameCards (images) {
     const cardImages = [...images, ...images];
-      shuffle(cardImages);
-      console.log(cardImages);
+   
+      shuffleCards(cardImages);
        cardImages.forEach(image => {
        const cardContainer = document.createElement("div");
        cardContainer.id = "card-container";
@@ -40,10 +44,34 @@ function shuffle(array) {
        const main = document.querySelector("#main")
        main.append(gameContainer);
     }) 
-
  };
+ function handleUserClick() {
+   gameBox.addEventListener("click", (event) => {
+     // check first click
+     if (firstClick === null) {
+       console.log(event);
+       firstClick = event.target;
+       firstClick.style.visibility = "hidden";
+       console.log("first",firstClick)
+       revealCard = event.path[1].children[1];
+       revealCard.style.visibility = "visible";
+       gameBox.removeEventListener("click", handleUserClick());
+       
+     } else {
+       console.log(event);
+        secondClick = event.target;
+        secondClick.style.visibility = "hidden";
+        console.log("second", secondClick);
+        revealSecondCard = event.path[1].children[1];
+        revealSecondCard.style.visibility = "visible";
+        secondClick.removeEventListener("click", handleUserClick());
+     }
+   });
+ }
+
  function initalizeApp() {
      createGameCards(imagesArray);
+     handleUserClick();
  }
  initalizeApp();
 
