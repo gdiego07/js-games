@@ -1,99 +1,85 @@
- const imagesArray = [
-   "images/banana.png",
-   "images/carrot.png",
-   "images/diiddy-kong.png",
-   "images/mario.png",
-   "images/matched-set.png",
-   "images/star.png",
-   "images/super.png",
-   "images/the-real-kirby.png",
- ]; 
-  let firstClick = null;
-  let secondClick = null;
-  const gameBox = document.querySelector("#game-container");
+const imagesArray = [
+  "images/banana.png",
+  "images/carrot.png",
+  "images/diiddy-kong.png",
+  "images/mario.png",
+  "images/matched-set.png",
+  "images/star.png",
+  "images/super.png",
+  "images/the-real-kirby.png",
+];
+let totalCards = [...imagesArray, ...imagesArray];
+let count = 0;
+let firstClick = null;
+let secondClick = null;
+let previousClick = null;
+let delay = 700;
+
+const gameContainer = document.getElementById("game-container");
 
 function shuffleCards(array) {
-    let randomNumber, newArray, deck;
-    for (deck = array.length - 1; deck > 0; deck--) {
-        randomNumber = Math.floor(Math.random() * (deck + 1));
-        newArray = array[deck];
-        array[deck] = array[randomNumber];
-        array[randomNumber] = newArray;
+  let randomNumber, newArray, deck;
+  for (deck = array.length - 1; deck > 0; deck--) {
+    randomNumber = Math.floor(Math.random() * (deck + 1));
+    newArray = array[deck];
+    array[deck] = array[randomNumber];
+    array[randomNumber] = newArray;
+  }
+  return array;
+}
+shuffleCards(totalCards);
+totalCards.forEach((image) => {
+  // give the card a class
+  const cardContainer = document.createElement("div");
+  cardContainer.id = "card-container";
+  const card = document.createElement("div");
+  card.classList.add("card");
+  const back = document.createElement("div");
+  back.id = image;
+  back.classList.add("back");
+  const front = document.createElement("div");
+  front.classList.add("front");
+  front.style.backgroundImage = `url("${image}")`;
+  // append
+  gameContainer.appendChild(cardContainer);
+  cardContainer.appendChild(card);
+  card.appendChild(front);
+  card.appendChild(back);
+});
+
+gameContainer.addEventListener("click", (event) => {
+  let clicked = event.target;
+  if (count < 2) {
+    count++;
+    if (count === 1) {
+      firstClick = clicked.id;
+      clicked.style.display = "none";
+      let frontOne = event.path[1].firstChild;
+      frontOne.classList.add("selected");
+      frontOne.style.visibility = "visible";
+    } else {
+      secondClick = clicked.id;
+      clicked.classList.add("selected");
+      clicked.style.backgroundImage = "none";
+      let frontTwo = event.path[1].firstChild;
+      frontTwo.classList.add("selected");
+      frontTwo.style.visibility = "visible";
     }
-    return array;
-};
-function createGameCards (images) {
-    const cardImages = [...images, ...images];
-   
-      shuffleCards(cardImages);
-       cardImages.forEach(image => {
-       const cardContainer = document.createElement("div");
-       cardContainer.id = "card-container";
-       const card = document.createElement('div');
-       card.className = "card";
-       const back = document.createElement('div');
-       back.className = "back";
-       const front = document.createElement('div');
-       front.className = 'front'
-       front.style.backgroundImage = `url("${image}")`;
-       cardContainer.append(card);
-       card.append(back);
-       card.append(front);
-       const gameContainer = document.querySelector("#game-container");
-       gameContainer.append(cardContainer);
-       const main = document.querySelector("#main")
-       main.append(gameContainer);
-    }) 
- };
- function handleUserClick() {
-   gameBox.addEventListener("click", (event) => {
-     // check first click
-     if (firstClick === null) {
-       console.log(event);
-       firstClick = event.target;
-       firstClick.style.visibility = "hidden";
-       console.log("first",firstClick)
-       revealCard = event.path[1].children[1];
-       revealCard.style.visibility = "visible";
-       gameBox.removeEventListener("click", handleUserClick());
-       
-     } else {
-       console.log(event);
-        secondClick = event.target;
-        secondClick.style.visibility = "hidden";
-        console.log("second", secondClick);
-        revealSecondCard = event.path[1].children[1];
-        revealSecondCard.style.visibility = "visible";
-        secondClick.removeEventListener("click", handleUserClick());
-     }
-   });
- }
-
- function initalizeApp() {
-     createGameCards(imagesArray);
-     handleUserClick();
- }
- initalizeApp();
-
-
- 
-// function displayStats() {
-// let scoreTrack = "0";
-// let countdown = "2:00";
-// let health = "5";
-// const score = document.createElement("div");
-// score.className = "score";
-// const timer = document.createElement("div");
-// timer.className = "timer";
-// const lives = document.createElement("div");
-// lives.className = "lives"
-// score.append(scoreTrack);
-// timer.append(countdown);
-// lives.append(health);
-// const stats = document.querySelector("#stats");
-// stats.append(score);
-// stats.append(timer);
-// stats.append(lives);
-// };
-
-
+    if (firstClick !== null && secondClick !== null) {
+      if (firstClick === secondClick) {
+        let selected = document.querySelectorAll(".selected")
+        selected.forEach((card) => {
+          card.style.display = "none";
+        });
+        firstClick = null;
+        secondClick = null;
+        count = 0;
+        }
+      }
+      previousClick = clicked;
+      
+    }
+    // previousClick = clicked;
+    // if (clicked.id === )
+  }
+);
