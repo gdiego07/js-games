@@ -61,5 +61,4 @@ header {
 }
 .selected {
     border: 3px solid orange;
-    /* border: none; */
 }
