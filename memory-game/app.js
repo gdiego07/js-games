@@ -14,7 +14,6 @@ let firstClick = null;
 let secondClick = null;
 let previousClick = null;
 let delay = 700;
-
 const gameContainer = document.getElementById("game-container");
 
 function shuffleCards(array) {
@@ -27,6 +26,7 @@ function shuffleCards(array) {
   }
   return array;
 }
+
 shuffleCards(totalCards);
 totalCards.forEach((image) => {
   // give the card a class
@@ -47,39 +47,52 @@ totalCards.forEach((image) => {
   card.appendChild(back);
 });
 
+function reset () {
+  firstClick = null;
+  secondClick = null;
+  count = 0;
+}
+
 gameContainer.addEventListener("click", (event) => {
   let clicked = event.target;
+  if (event.path[1].firstChild.classList.contains("selected")) {
+    return
+  }
+  console.log(clicked);
   if (count < 2) {
     count++;
     if (count === 1) {
-      firstClick = clicked.id;
-      clicked.style.display = "none";
+      firstClick = clicked;
+      firstClick.style.display = "none";
       let frontOne = event.path[1].firstChild;
       frontOne.classList.add("selected");
       frontOne.style.visibility = "visible";
     } else {
-      secondClick = clicked.id;
-      clicked.classList.add("selected");
-      clicked.style.backgroundImage = "none";
+      secondClick = clicked;
+      secondClick.style.display = "none";
       let frontTwo = event.path[1].firstChild;
       frontTwo.classList.add("selected");
       frontTwo.style.visibility = "visible";
     }
+
     if (firstClick !== null && secondClick !== null) {
       if (firstClick === secondClick) {
         let selected = document.querySelectorAll(".selected")
         selected.forEach((card) => {
           card.style.display = "none";
+        })
+      } else {
+        console.log("did not match");
+        console.log(event.target)
+        console.log(firstClick, "hello" ,secondClick)
+        let selected = document.querySelectorAll(".selected");
+        selected.forEach((card) => {
+          card.style.visibility = "hidden";
         });
-        firstClick = null;
-        secondClick = null;
-        count = 0;
-        }
+        firstClick.style.display = "initial"
+        secondClick.style.display = "initial";
       }
-      previousClick = clicked;
-      
+      reset();
     }
-    // previousClick = clicked;
-    // if (clicked.id === )
   }
-);
+});
