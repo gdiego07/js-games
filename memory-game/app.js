@@ -8,6 +8,7 @@ const imagesArray = [
   "images/super.png",
   "images/the-real-kirby.png",
 ];
+// 
 let totalCards = [...imagesArray, ...imagesArray];
 let count = 0;
 let firstClick = null;
@@ -15,7 +16,31 @@ let secondClick = null;
 let previousClick = null;
 let delay = 700;
 const gameContainer = document.getElementById("game-container");
-
+//
+const reset = () => {
+  firstClick = null;
+  secondClick = null;
+  count = 0;
+};
+//
+const match = () => {
+  debugger;
+  if (firstClick.id === secondClick.id) {
+    let selected = document.querySelectorAll(".selected");
+    selected.forEach((card) => {
+      card.style.display = "none";
+    });
+  } else {
+    console.log("did not match");
+    let selected = document.querySelectorAll(".selected");
+    selected.forEach((card) => {
+      card.style.visibility = "hidden";
+      card.classList.remove("selected");
+    });
+    firstClick.style.display = "initial";
+    secondClick.style.display = "initial";
+  }
+}
 function shuffleCards(array) {
   let randomNumber, newArray, deck;
   for (deck = array.length - 1; deck > 0; deck--) {
@@ -26,7 +51,7 @@ function shuffleCards(array) {
   }
   return array;
 }
-
+//
 shuffleCards(totalCards);
 totalCards.forEach((image) => {
   // give the card a class
@@ -46,12 +71,6 @@ totalCards.forEach((image) => {
   card.appendChild(front);
   card.appendChild(back);
 });
-
-function reset () {
-  firstClick = null;
-  secondClick = null;
-  count = 0;
-}
 
 gameContainer.addEventListener("click", (event) => {
   let clicked = event.target;
@@ -76,23 +95,8 @@ gameContainer.addEventListener("click", (event) => {
     }
 
     if (firstClick !== null && secondClick !== null) {
-      if (firstClick === secondClick) {
-        let selected = document.querySelectorAll(".selected")
-        selected.forEach((card) => {
-          card.style.display = "none";
-        })
-      } else {
-        console.log("did not match");
-        console.log(event.target)
-        console.log(firstClick, "hello" ,secondClick)
-        let selected = document.querySelectorAll(".selected");
-        selected.forEach((card) => {
-          card.style.visibility = "hidden";
-        });
-        firstClick.style.display = "initial"
-        secondClick.style.display = "initial";
-      }
-      reset();
+      setTimeout(match, delay);
+      setTimeout(reset, delay);
     }
   }
 });
