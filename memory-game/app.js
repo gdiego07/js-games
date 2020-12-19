@@ -9,38 +9,48 @@ const imagesArray = [
   "images/the-real-kirby.png",
 ];
 // 
+const header = document.getElementById("title")
+header.append("Super Smash 3");
+//
 let totalCards = [...imagesArray, ...imagesArray];
 let count = 0;
 let firstClick = null;
 let secondClick = null;
 let previousClick = null;
 let delay = 700;
-const gameContainer = document.getElementById("game-container");
 //
-const reset = () => {
-  firstClick = null;
-  secondClick = null;
-  count = 0;
-};
+let pair = 0;
+let health = "5";
+// let countdown = '+';
 //
-const match = () => {
-  debugger;
-  if (firstClick.id === secondClick.id) {
-    let selected = document.querySelectorAll(".selected");
-    selected.forEach((card) => {
-      card.style.display = "none";
-    });
-  } else {
-    console.log("did not match");
-    let selected = document.querySelectorAll(".selected");
-    selected.forEach((card) => {
-      card.style.visibility = "hidden";
-      card.classList.remove("selected");
-    });
-    firstClick.style.display = "initial";
-    secondClick.style.display = "initial";
-  }
+const stats = document.getElementById("stats-container");
+const score = document.createElement("div");
+score.id = "score"
+stats.append(score);
+score.append(pair);
+// const timer = document.createElement("div");
+// timer.id = "timer";
+// stats.append(timer);
+// timer.append(countdown);
+const lives = document.createElement("div");
+lives.id = "lives"
+stats.append(lives);
+lives.append(health);
+//
+//win/lose conditions
+  if (pair === 8) {
+    // win consition
+    console.log("I win")
+// } else if (countdown === 0) {
+//   // losing conditional
+//   console.log("Ahh dang it")
+// } 
+} else if (health === 0) {
+  // losing conditional
+  console.log("Ahh dang it");
 }
+//
+const gameContainer = document.getElementById("game-container");
 function shuffleCards(array) {
   let randomNumber, newArray, deck;
   for (deck = array.length - 1; deck > 0; deck--) {
@@ -71,13 +81,40 @@ totalCards.forEach((image) => {
   card.appendChild(front);
   card.appendChild(back);
 });
-
+//
+const reset = () => {
+  firstClick = null;
+  secondClick = null;
+  count = 0;
+};
+//
+const match = () => {
+  
+  if (firstClick.id === secondClick.id) {
+    let selected = document.querySelectorAll(".selected");
+    selected.forEach((card) => {
+      card.style.display = "none";
+    })
+  } else {
+    console.log("did not match");
+    let selected = document.querySelectorAll(".selected");
+    selected.forEach((card) => {
+      card.style.visibility = "hidden";
+      card.classList.remove("selected");
+    });
+    firstClick.style.display = "initial";
+    secondClick.style.display = "initial";
+    // health--;
+    // lives.value = health;
+    
+  }
+};
+//
 gameContainer.addEventListener("click", (event) => {
   let clicked = event.target;
   if (event.path[1].firstChild.classList.contains("selected")) {
     return
   }
-  console.log(clicked);
   if (count < 2) {
     count++;
     if (count === 1) {
@@ -93,7 +130,7 @@ gameContainer.addEventListener("click", (event) => {
       frontTwo.classList.add("selected");
       frontTwo.style.visibility = "visible";
     }
-
+//
     if (firstClick !== null && secondClick !== null) {
       setTimeout(match, delay);
       setTimeout(reset, delay);
