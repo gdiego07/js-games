@@ -20,7 +20,7 @@ let previousClick = null;
 let delay = 700;
 //
 let pair = 0;
-let health = "5";
+let health = 5;
 // let countdown = '+';
 //
 const stats = document.getElementById("stats-container");
@@ -38,17 +38,7 @@ stats.append(lives);
 lives.append(health);
 //
 //win/lose conditions
-  if (pair === 8) {
-    // win consition
-    console.log("I win")
-// } else if (countdown === 0) {
-//   // losing conditional
-//   console.log("Ahh dang it")
-// } 
-} else if (health === 0) {
-  // losing conditional
-  console.log("Ahh dang it");
-}
+//
 //
 const gameContainer = document.getElementById("game-container");
 function shuffleCards(array) {
@@ -89,13 +79,18 @@ const reset = () => {
 };
 //
 const match = () => {
-  
   if (firstClick.id === secondClick.id) {
+    pair++
+    score.textContent = pair;
+    console.log(score.textContent);
     let selected = document.querySelectorAll(".selected");
     selected.forEach((card) => {
       card.style.display = "none";
     })
+    score.textContent = pair++;
   } else {
+    health--;
+    lives.textContent = health
     console.log("did not match");
     let selected = document.querySelectorAll(".selected");
     selected.forEach((card) => {
@@ -104,9 +99,6 @@ const match = () => {
     });
     firstClick.style.display = "initial";
     secondClick.style.display = "initial";
-    // health--;
-    // lives.value = health;
-    
   }
 };
 //
@@ -137,3 +129,4 @@ gameContainer.addEventListener("click", (event) => {
     }
   }
 });
+
