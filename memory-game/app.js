@@ -87,7 +87,6 @@ const match = () => {
     selected.forEach((card) => {
       card.style.display = "none";
     })
-    score.textContent = pair++;
   } else {
     health--;
     lives.textContent = health
