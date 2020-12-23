@@ -8,8 +8,8 @@ const imagesArray = [
   "images/super.png",
   "images/the-real-kirby.png",
 ];
-// 
-const header = document.getElementById("title")
+//
+const header = document.getElementById("title");
 header.append("Super Smash 3");
 //
 let totalCards = [...imagesArray, ...imagesArray];
@@ -21,24 +21,17 @@ let delay = 700;
 //
 let pair = 0;
 let health = 5;
-// let countdown = '+';
 //
 const stats = document.getElementById("stats-container");
 const score = document.createElement("div");
-score.id = "score"
+score.id = "score";
 stats.append(score);
 score.append(pair);
-// const timer = document.createElement("div");
-// timer.id = "timer";
-// stats.append(timer);
-// timer.append(countdown);
+//
 const lives = document.createElement("div");
-lives.id = "lives"
+lives.id = "lives";
 stats.append(lives);
 lives.append(health);
-//
-//win/lose conditions
-//
 //
 const gameContainer = document.getElementById("game-container");
 function shuffleCards(array) {
@@ -72,25 +65,63 @@ totalCards.forEach((image) => {
   card.appendChild(back);
 });
 //
-const reset = () => {
+const resetClick = () => {
   firstClick = null;
   secondClick = null;
   count = 0;
 };
 //
+function win() {
+  let front = document.querySelectorAll(".front");
+  let back = document.querySelectorAll(".back");
+  alert("WINNER WINNER CHICKEN DINNER");
+  // console.log(front);
+  front.forEach((card) => {
+    card.style.display = "initial"
+    card.style.visibility = "hidden"
+    console.log(card);
+  })
+  back.forEach((card) => {
+    card.style.display = "initial"
+  })
+    pair = 0;
+    health = 5;
+    score.textContent = pair;
+    lives.textContent = health;
+}
+function lose () {
+  let front = document.querySelectorAll(".front");
+  let back = document.querySelectorAll(".back");
+  alert("WINNER WINNER CHICKEN DINNER");
+  // console.log(front);
+  front.forEach((card) => {
+    card.style.display = "initial";
+    card.style.visibility = "hidden";
+    console.log(card);
+  });
+  back.forEach((card) => {
+    card.style.display = "initial";
+  });
+}
+
+//
 const match = () => {
   if (firstClick.id === secondClick.id) {
-    pair++
+    pair++;
     score.textContent = pair;
-    console.log(score.textContent);
+    if (pair === 1) {
+      win();
+    }
     let selected = document.querySelectorAll(".selected");
     selected.forEach((card) => {
       card.style.display = "none";
-    })
+    });
   } else {
     health--;
-    lives.textContent = health
-    console.log("did not match");
+    lives.textContent = health;
+    if (health === 0) {
+      alert("LOST LADS");
+    }
     let selected = document.querySelectorAll(".selected");
     selected.forEach((card) => {
       card.style.visibility = "hidden";
@@ -104,7 +135,7 @@ const match = () => {
 gameContainer.addEventListener("click", (event) => {
   let clicked = event.target;
   if (event.path[1].firstChild.classList.contains("selected")) {
-    return
+    return;
   }
   if (count < 2) {
     count++;
@@ -121,11 +152,10 @@ gameContainer.addEventListener("click", (event) => {
       frontTwo.classList.add("selected");
       frontTwo.style.visibility = "visible";
     }
-//
+    //
     if (firstClick !== null && secondClick !== null) {
       setTimeout(match, delay);
-      setTimeout(reset, delay);
+      setTimeout(resetClick, delay);
     }
   }
 });
-
